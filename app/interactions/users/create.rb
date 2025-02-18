@@ -1,5 +1,5 @@
 class Users::Create < ActiveInteraction::Base
-  #object :user
+  # object :user
 
   string :email
   string :patronymic
@@ -21,7 +21,6 @@ class Users::Create < ActiveInteraction::Base
 
 
   def execute
-    puts '!!!!!!!!!!!'
     full_name = [surname, name, patronymic].reject(&:blank?).map(&:strip).join(' ')
     user = User.create(inputs.slice(:email, :name, :patronymic, :age, :nationality, :country, :gender).merge(full_name: full_name))
     user.skills = skills.split(',').map(&:strip).map { |e| Skill.find_or_create_by(name: e) }

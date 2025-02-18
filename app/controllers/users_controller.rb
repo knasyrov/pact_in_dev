@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    user = Users::Create.run!(user_params)
+    user = Users::Create.run!(params)
 
     if user.valid?
       redirect_to(user.result)
@@ -30,6 +30,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.fetch(:user, {})
+      params.permit!
     end
 end
